@@ -46,7 +46,11 @@ def stations():
     stations = list(np.ravel(station))
     return jsonify(stations)
 
-# @app.route("/api/v1.0/tobs")
-# def tobs():
+@app.route("/api/v1.0/tobs")
+def tobs():
+    temp = session.query(Measurement.date, Measurement.tobs).filter(Measurement.station == "USC00519281").all()
+    temps = list(np.ravel(temp))
+    return jsonify(temps)
+
 if __name__ == "__main__":
     app.run(debug=True)    
